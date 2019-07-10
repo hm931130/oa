@@ -16,7 +16,7 @@
 
 
     <insert id="insert" parameterType="Employee">
-        insert into employee values(#{sn},#{password},#{name},#{department_sn},#{post})
+        insert into employee values(#{sn},#{password},#{name},#{departmentSn},#{post})
     </insert>
 
     <update id="update" parameterType="Employee">
@@ -34,7 +34,6 @@
 
     <select id="selectAll" resultMap="employee">
          select e.* ,d.sn dsn,d.name dname from employee e LEFT join department d on d.sn=e.department_sn
-         where e.sn=#{sn}
     </select>
 
 </mapper>

@@ -32,4 +32,10 @@
     </bean>
 
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.hm.oa.global.LoginIntercepter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

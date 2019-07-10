@@ -12,6 +12,11 @@ public class Constants {
 
 
     /**
+     * 用户Session标识
+     */
+    public static final String SESSION_USER = "session_user";
+
+    /**
      * 职务
      */
     public static final String POST_STAFF = "员工";
@@ -20,7 +25,7 @@ public class Constants {
     public static final String POST_CASHIER = "财务";
 
 
-    public List<String> getPost() {
+    public static List<String> getPost() {
         List<String> postList = new ArrayList<String>(4);
         postList.add(POST_STAFF);
         postList.add(POST_FM);
