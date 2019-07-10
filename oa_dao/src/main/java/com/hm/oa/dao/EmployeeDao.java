@@ -22,4 +22,5 @@ public interface EmployeeDao {
     Employee select(String sn);
 
     List<Employee> selectAll();
+
 }

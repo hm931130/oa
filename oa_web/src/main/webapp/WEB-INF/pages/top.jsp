@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 
@@ -10,9 +10,11 @@
 
     <title> 爱慕课OA--欢迎使用爱慕课OA系统 </title>
 
-    <link rel="stylesheet" type="text/css" href="/assets/skin/default_skin/css/theme.css">
-    <link rel="stylesheet" type="text/css" href="/assets/admin-tools/admin-forms/css/admin-forms.css">
-    <link rel="shortcut icon" href="/assets/img/favicon.ico">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/skin/default_skin/css/theme.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/admin-tools/admin-forms/css/admin-forms.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
 </head>
 
 <body class="admin-validation-page" data-spy="scroll" data-target="#nav-spy" data-offset="200">

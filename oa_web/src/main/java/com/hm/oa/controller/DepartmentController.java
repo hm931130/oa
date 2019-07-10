@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Map;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: TODO(部门控制器)
  * @Author Administrator
  * @Date 2019/7/7/007 1:22
  */
@@ -17,46 +17,49 @@ import java.util.Map;
 @RequestMapping("/department")
 public class DepartmentController {
 
-    @Autowired
-    private DepartmentBiz departmentBiz;
+ @Autowired
+ private DepartmentBiz departmentBiz;
 
 
-    @RequestMapping("/list")
-    public String list(Map<String, Object> map) {
-        map.put("list", departmentBiz.getAll());
-        return "department_list";
-    }
 
-    @RequestMapping("/to_add")
-    public String toAdd(Map<String, Object> map) {
-        map.put("department", new Department());
-        return "department_add";
-    }
+ @RequestMapping("/list")
+ public String list(Map<String, Object> map) {
+  map.put("list", departmentBiz.getAll());
 
 
-    @RequestMapping("/add")
-    public String add(Department department) {
-        departmentBiz.add(department);
-        return "redirect:list";
-    }
+  return "department_list";
+ }
+
+ @RequestMapping("/to_add")
+ public String toAdd(Map<String, Object> map) {
+  map.put("department", new Department());
+  return "department_add";
+ }
 
 
-    @RequestMapping(value = "/to_update", params = "sn")
-    public String toUpdate(String sn, Map<String, Object> map) {
-        map.put("department", departmentBiz.get(sn));
-        return "department_update";
-    }
+ @RequestMapping("/add")
+ public String add(Department department) {
+  departmentBiz.add(department);
+  return "redirect:list";
+ }
 
-    @RequestMapping("/update")
-    public String update(Department department) {
-        departmentBiz.edit(department);
-        return "redirect:list";
-    }
 
-    @RequestMapping(value = "/remove", params = "sn")
-    public String remove(String sn) {
-        departmentBiz.remove(sn);
-        return "redirect:list";
-    }
+ @RequestMapping(value = "/to_update", params = "sn")
+ public String toUpdate(String sn, Map<String, Object> map) {
+  map.put("department", departmentBiz.get(sn));
+  return "department_update";
+ }
+
+ @RequestMapping("/update")
+ public String update(Department department) {
+  departmentBiz.edit(department);
+  return "redirect:list";
+ }
+
+ @RequestMapping(value = "/remove", params = "sn")
+ public String remove(String sn) {
+  departmentBiz.remove(sn);
+  return "redirect:list";
+ }
 
 }

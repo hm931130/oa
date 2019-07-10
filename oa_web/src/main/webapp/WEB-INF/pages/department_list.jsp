@@ -32,7 +32,7 @@
                                 </button>
                                 <button type="button" class="btn btn-default light">
                                     <i class="fa fa-plus"
-                                       onclick="javascript:window.location.href='/department/to_add';"></i>
+                                       onclick="javascript:window.location.href='${pageContext.request.contextPath}/department/to_add';"></i>
                                 </button>
                             </div>
                         </div>
@@ -75,8 +75,8 @@
                                 <td>${dept.name}</td>
                                 <td>${dept.address}</td>
                                 <td>
-                                    <a href="/department/to_update?sn=${dept.sn}">编辑</a>
-                                    <a href="/department/remove?sn=${dept.sn}">删除</a>
+                                    <a href="${pageContext.request.contextPath}/department/to_update?sn=${dept.sn}">编辑</a>
+                                    <a href="${pageContext.request.contextPath}/department/remove?sn=${dept.sn}">删除</a>
                                 </td>
                             </tr>
                         </c:forEach>

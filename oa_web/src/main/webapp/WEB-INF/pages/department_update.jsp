@@ -20,7 +20,7 @@
         </div>
         <div class="admin-form theme-primary mw1000 center-block" style="padding-bottom: 175px;">
             <div class="panel heading-border">
-                <form:form action="/department/update" modelAttribute="department" id="admin-form" name="addForm">
+                <form:form action="${pageContext.request.contextPath}/department/update" modelAttribute="department" id="admin-form" name="addForm">
                         <div class="panel-body bg-light">
                             <div class="section-divider mt20 mb40">
                                 <span> 基本信息 </span>
