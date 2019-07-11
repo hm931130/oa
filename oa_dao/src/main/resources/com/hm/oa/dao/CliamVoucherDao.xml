@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.oa.dao.CliamVoucherDao">
+
+    <resultMap id="BaseResultMap" type="ClaimVoucher">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="cause" column="cause" jdbcType="VARCHAR"/>
+        <result property="createSn" column="create_sn" jdbcType="CHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="nextDealSn" column="next_deal_sn" jdbcType="VARCHAR"/>
+        <result property="totalAmount" column="total_amount" jdbcType="DOUBLE"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <association property="creater" javaType="Employee">
+            <result property="name" column="cname" jdbcType="VARCHAR"/>
+            <result property="post" column="cpost" jdbcType="VARCHAR"/>
+        </association>
+        <association property="dealer" javaType="Employee">
+            <result property="name" column="dname" jdbcType="VARCHAR"/>
+            <result property="post" column="dpost" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+
+    <insert id="insert" parameterType="ClaimVoucher" useGeneratedKeys="true">
+        insert into claim_voucher
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="cause != null">
+                cause,
+            </if>
+            <if test="createSn != null">
+                create_sn,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="nextDealSn != null">
+                next_deal_sn,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+            <if test="status != null">
+                status
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="cause != null">
+                #{cause,jdbcType=VARCHAR},
+            </if>
+            <if test="createSn != null">
+                #{createSn,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nextDealSn != null">
+                #{nextDealSn,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="ClaimVoucher">
+        update claim_voucher
+        <trim prefix="set" suffixOverrides=",">
+            <if test="cause != null ">
+                cause=#{cause,jdbcType=VARCHAR},
+            </if>
+            <if test="nextDealSn != null">
+                next_deal_sn=#{nextDealSn,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null">
+                total_amount=#{totalAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                status=#{status,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from claim_voucher where id=#{id}
+    </delete>
+
+    <select id="select" parameterType="Integer" resultType="ClaimVoucher">
+        select * from claim_voucher where id=#{id}
+    </select>
+
+    <select id="selectByCreateSn" parameterType="String" resultMap="BaseResultMap">
+        select cv.* ,ce.name cname,ce.post cpost, d.name dname,d.post dpost
+        from claim_voucher cv
+        left join employee ce on cv.create_sn = ce.sn
+        left join employee d  on cv.next_deal_sn = d.sn
+        where cv.create_sn=#{sn}
+        order by cv.create_time desc
+    </select>
+
+    <select id="selectByNextDealSn" parameterType="String" resultMap="BaseResultMap">
+        select cv.* ,ce.name cname,ce.post cpost, d.name dname,d.post dpost
+        from claim_voucher cv
+        left join employee ce on cv.create_sn = ce.sn
+        left join employee d  on cv.next_deal_sn = d.sn
+        where cv.next_deal_sn=#{ndsn}
+        order by cv.create_time desc
+    </select>
+</mapper>

@@ -5,14 +5,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class ClaimVoucher {
+    /**
+     * 自动生成
+     */
     private Integer id;
 
     private String cause;
 
+    /**
+     * 创建人编号
+     */
     private String createSn;
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date createTime;
 
+    /**
+     * 待处理人
+     */
     private String nextDealSn;
 
     private Double totalAmount;

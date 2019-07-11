@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.oa.dao.ClaimVoucherItemDao">
+    <resultMap id="BaseResultMap" type="ClaimVoucherItem">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="amount" column="amount" jdbcType="DOUBLE"/>
+        <result property="claimVoucherId" column="claim_voucher_id" jdbcType="INTEGER"/>
+        <result property="item" column="item" jdbcType="VARCHAR"/>
+        <result property="comment" column="comment" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="ClaimVoucherItem">
+        insert into claim_voucher_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="claimVoucherId!=null">
+                claim_voucher_id,
+            </if>
+            <if test="item!=null">
+                item,
+            </if>
+            <if test="amount!=null">
+                amount,
+            </if>
+            <if test="comment!=null">
+                comment,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="claimVoucherId!=null">
+                #{claimVoucherId,jdbcType=INTEGER},
+            </if>
+            <if test="item!=null">
+                #{item,jdbcType=VARCHAR},
+            </if>
+            <if test="amount!=null">
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="comment!=null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="ClaimVoucherItem">
+        update claim_voucher_item
+        <trim prefix="set(" suffix=")" suffixOverrides=",">
+            <if test="item != null">
+                item = #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DOUBLE}
+            </if>
+            <if test="comment != null">
+                comment = #{comment,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from claim_voucher_item where id=#{id}
+    </delete>
+
+    <select id="searchByClaimVoucher" parameterType="Integer" resultMap="BaseResultMap">
+        select * from claim_voucher_item where  claim_voucher_id=#{id}
+    </select>
+
+
+</mapper>

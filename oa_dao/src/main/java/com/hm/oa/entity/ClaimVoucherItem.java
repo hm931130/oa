@@ -3,8 +3,14 @@ package com.hm.oa.entity;
 public class ClaimVoucherItem {
     private Integer id;
 
+    /**
+     * 报销单编号
+     */
     private Integer claimVoucherId;
 
+    /**
+     * 费用类型
+     */
     private String item;
 
     private Double amount;
