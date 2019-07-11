@@ -43,7 +43,7 @@
                 #{claimVoucherId,jdbcType=INTEGER},
             </if>
             <if test="dealSn!=null">
-                #{dealSn,jdbcType=VARCHAR},
+                #{dealSn,jdbcType=CHAR},
             </if>
             <if test="dealTime!=null">
                 #{dealTime,jdbcType=TIMESTAMP},

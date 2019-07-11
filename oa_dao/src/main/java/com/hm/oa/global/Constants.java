@@ -38,7 +38,7 @@ public class Constants {
      * 费用类别
      */
 
-    public List<String> getFeeType() {
+    public static List<String> getFeeType() {
         List<String> fees = new ArrayList<String>();
         fees.add("交通");
         fees.add("餐饮");

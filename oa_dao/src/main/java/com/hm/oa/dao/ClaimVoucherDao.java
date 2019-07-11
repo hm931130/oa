@@ -12,7 +12,7 @@ import java.util.List;
  * @Description:
  */
 @Repository("cliamVoucherDao")
-public interface CliamVoucherDao {
+public interface ClaimVoucherDao {
  void insert(ClaimVoucher voucher);
 
  void update(ClaimVoucher voucher);
@@ -24,4 +24,7 @@ public interface CliamVoucherDao {
  List<ClaimVoucher> selectByCreateSn(String sn);
 
  List<ClaimVoucher> selectByNextDealSn(String ndsn);
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.hm.oa.dao;
 
 import com.hm.oa.entity.Employee;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface EmployeeDao {
     Employee select(String sn);
 
     List<Employee> selectAll();
+
+    List<Employee> selectByDepartmetAndPost(@Param("dsn") String dsn, @Param("post") String post);
 
 }

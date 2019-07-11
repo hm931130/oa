@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hm.oa.dao.CliamVoucherDao">
+<mapper namespace="com.hm.oa.dao.ClaimVoucherDao">
 
     <resultMap id="BaseResultMap" type="ClaimVoucher">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="cause" column="cause" jdbcType="VARCHAR"/>
         <result property="createSn" column="create_sn" jdbcType="CHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="nextDealSn" column="next_deal_sn" jdbcType="VARCHAR"/>
+        <result property="nextDealSn" column="next_deal_sn" jdbcType="CHAR"/>
         <result property="totalAmount" column="total_amount" jdbcType="DOUBLE"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
         <association property="creater" javaType="Employee">
@@ -21,7 +21,7 @@
     </resultMap>
 
 
-    <insert id="insert" parameterType="ClaimVoucher" useGeneratedKeys="true">
+    <insert id="insert" parameterType="ClaimVoucher" useGeneratedKeys="true" keyProperty="id">
         insert into claim_voucher
         <trim prefix="(" suffixOverrides="," suffix=")">
             <if test="cause != null">
@@ -48,13 +48,13 @@
                 #{cause,jdbcType=VARCHAR},
             </if>
             <if test="createSn != null">
-                #{createSn,jdbcType=VARCHAR},
+                #{createSn,jdbcType=CHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="nextDealSn != null">
-                #{nextDealSn,jdbcType=VARCHAR},
+                #{nextDealSn,jdbcType=CHAR},
             </if>
             <if test="totalAmount != null">
                 #{totalAmount,jdbcType=DOUBLE},
@@ -72,13 +72,13 @@
                 cause=#{cause,jdbcType=VARCHAR},
             </if>
             <if test="nextDealSn != null">
-                next_deal_sn=#{nextDealSn,jdbcType=VARCHAR},
+                next_deal_sn=#{nextDealSn,jdbcType=CHAR},
             </if>
             <if test="totalAmount != null">
                 total_amount=#{totalAmount,jdbcType=DOUBLE},
             </if>
             <if test="status != null">
-                status=#{status,jdbcType=VARCHAR}
+                status=#{status,jdbcType=VARCHAR},
             </if>
         </trim>
     </update>
@@ -87,8 +87,12 @@
         delete from claim_voucher where id=#{id}
     </delete>
 
-    <select id="select" parameterType="Integer" resultType="ClaimVoucher">
-        select * from claim_voucher where id=#{id}
+    <select id="select" parameterType="Integer" resultMap="BaseResultMap">
+         select cv.* ,ce.name cname,ce.post cpost, d.name dname,d.post dpost
+        from claim_voucher cv
+        left join employee ce on cv.create_sn = ce.sn
+        left join employee d  on cv.next_deal_sn = d.sn
+        where cv.id=#{id}
     </select>
 
     <select id="selectByCreateSn" parameterType="String" resultMap="BaseResultMap">

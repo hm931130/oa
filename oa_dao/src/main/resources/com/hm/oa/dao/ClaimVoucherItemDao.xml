@@ -44,15 +44,15 @@
 
     <update id="update" parameterType="ClaimVoucherItem">
         update claim_voucher_item
-        <trim prefix="set(" suffix=")" suffixOverrides=",">
+        <trim prefix="set" suffixOverrides=",">
             <if test="item != null">
-                item = #{item,jdbcType=VARCHAR}
+                item = #{item,jdbcType=VARCHAR},
             </if>
             <if test="amount != null">
-                amount = #{amount,jdbcType=DOUBLE}
+                amount = #{amount,jdbcType=DOUBLE},
             </if>
             <if test="comment != null">
-                comment = #{comment,jdbcType=VARCHAR}
+                comment = #{comment,jdbcType=VARCHAR},
             </if>
         </trim>
     </update>
