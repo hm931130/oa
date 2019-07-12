@@ -3,14 +3,14 @@
 <mapper namespace="com.hm.oa.dao.EmployeeDao">
 
     <resultMap id="employee" type="Employee">
-        <id property="sn" column="sn" javaType="String"/>
-        <result property="password" column="password" javaType="String"/>
-        <result property="name" column="name" javaType="String"/>
-        <result property="departmentSn" column="department_sn" javaType="String"/>
-        <result property="post" column="post" javaType="String"/>
+        <id property="sn" column="sn" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="departmentSn" column="department_sn" jdbcType="CHAR"/>
+        <result property="post" column="post" jdbcType="VARCHAR"/>
         <association property="department" column="department_sn" javaType="Department">
-            <id property="sn" column="dsn" javaType="String"/>
-            <result property="name" column="dname" javaType="String"/>
+            <id property="sn" column="dsn" jdbcType="CHAR"/>
+            <result property="name" column="dname" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
 
@@ -41,10 +41,14 @@
         select e.* ,d.sn dsn,d.name dname from employee e LEFT join department d on d.sn=e.department_sn
         where e.sn is not null
         <if test="dsn != null and dsn!=''">
-            and e.department_sn=#{dsn,jdbcType=VARCHAR}
+            and e.department_sn=#{dsn,jdbcType=CHAR}
         </if>
         <if test="post != null and post!=''">
             and e.post=#{post,jdbcType=VARCHAR}
         </if>
+    </select>
+
+    <select id="selectByDealSn" parameterType="String" resultMap="employee">
+         select * from employee where sn=#{sn}
     </select>
 </mapper>

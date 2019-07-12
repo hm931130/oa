@@ -55,6 +55,7 @@
                 comment = #{comment,jdbcType=VARCHAR},
             </if>
         </trim>
+        where id=#{id}
     </update>
 
     <delete id="delete" parameterType="Integer">

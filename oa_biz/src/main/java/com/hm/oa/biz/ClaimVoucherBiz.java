@@ -28,4 +28,6 @@ public interface ClaimVoucherBiz {
 
     void submint(int id);
 
+    void deal(DealRecord dealRecord);
+
 }

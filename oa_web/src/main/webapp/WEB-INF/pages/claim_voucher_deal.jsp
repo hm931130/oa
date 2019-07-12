@@ -85,10 +85,10 @@
                                         <a href="${pageContext.request.contextPath}/claim_voucher/submit?id=${cv.id}">提交</a>
                                     </c:if>
                                     <c:if test="${cv.status==Constants.CLAIMVOCHER_SUBMIT || cv.status==Constants.CLAIMVOCHER_RECHECK}">
-                                        <a href="${pageContext.request.contextPath}/claim_voucher/detail?id=${cv.id}">审核</a>
+                                        <a href="${pageContext.request.contextPath}/claim_voucher/to_check?id=${cv.id}">审核</a>
                                     </c:if>
                                     <c:if test="${cv.status==Constants.CLAIMVOCHER_APPROVED}">
-                                        <a href=${pageContext.request.contextPath}/claim_voucher/detail?id=${cv.id}">打款</a>
+                                        <a href="${pageContext.request.contextPath}/claim_voucher/to_check?id=${cv.id}">打款</a>
                                     </c:if>
                                     <a href="${pageContext.request.contextPath}/claim_voucher/detail?id=${cv.id}">详细信息</a>
                                 </td>

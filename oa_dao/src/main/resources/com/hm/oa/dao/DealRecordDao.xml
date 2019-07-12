@@ -11,6 +11,9 @@
         <result property="dealWay" column="deal_way" jdbcType="VARCHAR"/>
         <result property="dealResult" column="deal_result" jdbcType="VARCHAR"/>
         <result property="comment" column="comment" jdbcType="VARCHAR"/>
+        <association property="dealer" javaType="Employee">
+            <result property="name" column="ename" jdbcType="VARCHAR"/>
+        </association>
     </resultMap>
 
 
@@ -62,7 +65,9 @@
 
 
     <select id="searchByVoucher" parameterType="Integer" resultMap="BaseResultMap">
-        select * from deal_record where claim_voucher_id=#{cvid}
+        select d.* ,e.name ename from deal_record d
+        left join employee e on d.deal_sn=e.sn
+        where claim_voucher_id=#{cvid}
     </select>
 
 </mapper>

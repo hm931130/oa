@@ -64,7 +64,7 @@
                                  class="img-responsive">
                         </a>
                         <div class="media-body">
-                            <div class="media-author">${sessionScope.employee.name}---${sessionScope.employee.post}</div>
+                            <div class="media-author">${sessionScope.session_user.name}---${sessionScope.session_user.post}</div>
                             <div class="media-links">
                                 <a href="${pageContext.request.contextPath}/quit">退出</a>
                             </div>

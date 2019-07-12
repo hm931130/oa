@@ -22,6 +22,8 @@ public interface EmployeeDao {
 
     Employee select(String sn);
 
+    Employee selectByDealSn(String sn);
+
     List<Employee> selectAll();
 
     List<Employee> selectByDepartmetAndPost(@Param("dsn") String dsn, @Param("post") String post);
